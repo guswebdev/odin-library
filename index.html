@@ -82,30 +82,31 @@
         </section>
       </div>
     </main>
-    <section
-      style="
-        background-color: rgba(22, 22, 22, 0.466);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 99;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <article style="background-color: white; width: 300px; padding: 1rem">
-        <h2>Formulario</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
-          officia sapiente accusantium provident reiciendis repudiandae mollitia
-          tenetur necessitatibus commodi cupiditate adipisci aut aliquam
-          temporibus cum perferendis doloremque, modi facere expedita!
-        </p>
-      </article>
-    </section>
+    <dialog>
+      <button autofocus>X</button>
+      <form action="" id="form">
+        <h3>Nuevo Libro</h3>
+        <div>
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" name="nombre" required/>
+        </div>
+        <div>
+          <label for="autor">Autor</label>
+          <input id="autor" name="autor" type="text" required />
+        </div>
+        <div>
+          <label for="paginas">Paginas</label>
+          <input type="tel" name="paginas" id="paginas" required/>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" id="estado" name="estado"/>
+            <span>¿Leiste este libro?</span>
+          </label>
+        </div>
+        <button type="submit">Agregar Libro</button>
+      </form>
+    </dialog>
     <script src="app.js"></script>
   </body>
 </html>
