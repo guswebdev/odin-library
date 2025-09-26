@@ -1,4 +1,5 @@
 const d = document;
+
 //Prueba MODAL
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector(".header button");
@@ -15,6 +16,11 @@ closeButton.addEventListener("click", () => {
 });
 
 const $form = d.getElementById("form");
+
+const $containerCards = d.querySelector(".cards");
+const $template = d.getElementById("template-card").content;
+const $fragment = d.createDocumentFragment();
+
 const myLibrary = [];
 
 function Book(title, autor, paginas, estado) {
@@ -29,25 +35,44 @@ function addBookToLibrary(title, autor, paginas, estado) {
   myLibrary.push(new Book(title, autor, paginas, estado));
 }
 
-addBookToLibrary("11 JG", "SSC", 100, true);
-addBookToLibrary("gp 11", "css", 500, false);
-addBookToLibrary("Cita en la Cima", "Raimon Samso", 250, false);
-
 function mostrarLibros() {
-  /*
-  for (let i of myLibrary) {
-    document.write(`<h4>${i.id}</h4>`);
-    document.write(`<h4>${i.title}</h4>`);
-    document.write(`<h4>${i.autor}</h4>`);
-    document.write(`<h4>${i.paginas}</h4>`);
-    document.write(`<h4>${i.estado}</h4>`);
-  }
-    */
   console.log(myLibrary);
   //Recorrer el array y mostrar datos
+  myLibrary.forEach((el) => {
+    $template.querySelector(".card").dataset.id = el.id;
+    $template.querySelector("h3").textContent = el.title;
+    $template.querySelector("em").textContent = el.autor;
+    $template.querySelector(".card-paginas").textContent = el.paginas;
+    $template.querySelector(".card-estado").textContent = `${
+      el.estado ? "Leido" : "No Leido"
+    }`;
+    let $clone = d.importNode($template, true);
+    $fragment.appendChild($clone);
+  });
+  $containerCards.appendChild($fragment);
 }
 
-mostrarLibros();
+const click = (e) => {
+  if (myLibrary.length != 0) {
+    if (e.target.classList.contains("fa-trash-can")) {
+      eliminarLibro(e.target.closest("article").dataset.id);
+      recargarLibros();
+    }
+  }
+};
+
+function eliminarLibro(idEliminar) {
+  myLibrary.forEach((item, index, arr) => {
+    if (item.id == idEliminar) {
+      arr.splice(index, 1);
+    }
+  });
+}
+
+function recargarLibros() {
+  $containerCards.innerHTML = "";
+  mostrarLibros();
+}
 
 const submit = (e) => {
   e.preventDefault();
@@ -57,9 +82,10 @@ const submit = (e) => {
     e.target.paginas.value,
     e.target.estado.checked
   );
-  mostrarLibros()
-  $form.reset()
+  recargarLibros();
+  $form.reset();
   dialog.close();
 };
 
 $form.addEventListener("submit", submit);
+d.addEventListener("click", click);

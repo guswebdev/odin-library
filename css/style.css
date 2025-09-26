@@ -31,6 +31,7 @@ body {
   font-weight: bold;
   border: none;
   border-radius: 20px;
+  cursor: pointer;
 }
 /* HEADER */
 
@@ -46,10 +47,12 @@ body {
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-columns: 300px;
   gap: 1rem;
 }
 
 .card {
+  max-width: 320px;
   background-color: white;
   padding: 1rem;
   border-radius: 10px;

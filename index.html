@@ -31,54 +31,6 @@
     <main>
       <div class="main-container">
         <section class="cards">
-          <article class="card">
-            <div class="card-info">
-              <h3>Cita en la Cima</h3>
-              <h4><em>Raimon Samso</em></h4>
-              <p>Paginas: <span>250</span></p>
-              <p>Estado: <span>Leido</span></p>
-            </div>
-            <div class="controles">
-              <span>
-                <i class="fa-solid fa-trash-can"></i>
-              </span>
-              <span>
-                <i class="fa-solid fa-toggle-on"></i>
-              </span>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-info">
-              <h3>Cita en la Cima</h3>
-              <h4><em>Raimon Samso</em></h4>
-              <p>Paginas: <span>250</span></p>
-              <p>Estado: <span>Leido</span></p>
-            </div>
-            <div class="controles">
-              <span>
-                <i class="fa-solid fa-trash-can"></i>
-              </span>
-              <span>
-                <i class="fa-solid fa-toggle-on"></i>
-              </span>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-info">
-              <h3>Cita en la Cima</h3>
-              <h4><em>Raimon Samso</em></h4>
-              <p>Paginas: <span>250</span></p>
-              <p>Estado: <span>Leido</span></p>
-            </div>
-            <div class="controles">
-              <span>
-                <i class="fa-solid fa-trash-can"></i>
-              </span>
-              <span>
-                <i class="fa-solid fa-toggle-on"></i>
-              </span>
-            </div>
-          </article>
         </section>
       </div>
     </main>
@@ -88,7 +40,7 @@
         <h3>Nuevo Libro</h3>
         <div>
           <label for="nombre">Nombre</label>
-          <input id="nombre" type="text" name="nombre" required/>
+          <input id="nombre" type="text" name="nombre" required />
         </div>
         <div>
           <label for="autor">Autor</label>
@@ -96,17 +48,35 @@
         </div>
         <div>
           <label for="paginas">Paginas</label>
-          <input type="tel" name="paginas" id="paginas" required/>
+          <input type="tel" name="paginas" id="paginas" required />
         </div>
         <div>
           <label>
-            <input type="checkbox" id="estado" name="estado"/>
+            <input type="checkbox" id="estado" name="estado" />
             <span>¿Leiste este libro?</span>
           </label>
         </div>
         <button type="submit">Agregar Libro</button>
       </form>
     </dialog>
+    <template id="template-card">
+      <article class="card">
+        <div class="card-info">
+          <h3></h3>
+          <h4><em></em></h4>
+          <p>Paginas: <span class="card-paginas"></span></p>
+          <p>Estado: <span class="card-estado"></span></p>
+        </div>
+        <div class="controles">
+          <span>
+            <i class="fa-solid fa-trash-can"></i>
+          </span>
+          <span>
+            <i class="fa-solid fa-toggle-on"></i>
+          </span>
+        </div>
+      </article>
+    </template>
     <script src="app.js"></script>
   </body>
 </html>
