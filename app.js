@@ -31,7 +31,12 @@ function Book(title, autor, paginas, estado) {
   this.estado = estado;
 }
 
-function addBookToLibrary(title, autor, paginas, estado) {
+Book.prototype.setEstado = function (estado) {
+  this.estado = estado; // Altera el estado de la propiedad 'leido'
+  console.log("ESTADO CAMBIADO");
+};
+
+function addBookToLibrary(title, autor, paginas, estado = false) {
   myLibrary.push(new Book(title, autor, paginas, estado));
 }
 
@@ -46,6 +51,7 @@ function mostrarLibros() {
     $template.querySelector(".card-estado").textContent = `${
       el.estado ? "Leido" : "No Leido"
     }`;
+    $template.querySelector("#switch").checked = el.estado;
     let $clone = d.importNode($template, true);
     $fragment.appendChild($clone);
   });
@@ -56,6 +62,13 @@ const click = (e) => {
   if (myLibrary.length != 0) {
     if (e.target.classList.contains("fa-trash-can")) {
       eliminarLibro(e.target.closest("article").dataset.id);
+      recargarLibros();
+    }
+    if (e.target.classList.contains("toggle")) {
+      let libro = myLibrary.find(
+        (libro) => libro.id === e.target.closest("article").dataset.id
+      );
+      libro.setEstado(e.target.checked);
       recargarLibros();
     }
   }
