@@ -23,25 +23,25 @@ const $fragment = d.createDocumentFragment();
 
 const myLibrary = [];
 
-function Book(title, autor, paginas, estado) {
-  this.id = `${crypto.randomUUID()}`;
-  this.title = title;
-  this.autor = autor;
-  this.paginas = paginas;
-  this.estado = estado;
+class Libro {
+  constructor(title, autor, paginas, estado) {
+    this.id = `${crypto.randomUUID()}`;
+    this.title = title;
+    this.autor = autor;
+    this.paginas = paginas;
+    this.estado = estado;
+  }
+
+  cambiarEstado(nuevoEstado) {
+    this.estado = nuevoEstado;
+  }
 }
 
-Book.prototype.setEstado = function (estado) {
-  this.estado = estado; // Altera el estado de la propiedad 'leido'
-  console.log("ESTADO CAMBIADO");
-};
-
 function addBookToLibrary(title, autor, paginas, estado = false) {
-  myLibrary.push(new Book(title, autor, paginas, estado));
+  myLibrary.push(new Libro(title, autor, paginas, estado));
 }
 
 function mostrarLibros() {
-  console.log(myLibrary);
   //Recorrer el array y mostrar datos
   myLibrary.forEach((el) => {
     $template.querySelector(".card").dataset.id = el.id;
@@ -68,7 +68,7 @@ const click = (e) => {
       let libro = myLibrary.find(
         (libro) => libro.id === e.target.closest("article").dataset.id
       );
-      libro.setEstado(e.target.checked);
+      libro.cambiarEstado(e.target.checked);
       recargarLibros();
     }
   }
