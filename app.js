@@ -87,18 +87,71 @@ function recargarLibros() {
   mostrarLibros();
 }
 
+function validarInputText(input) {
+  const patron = /^[A-Za-z\s]*$/;
+  console.log(input.validity);
+
+  if (input.value.length === 0) {
+    input.setCustomValidity("El Campo no puede ir Vacio");
+    input.reportValidity();
+  } else if (!patron.test(input.value)) {
+    input.setCustomValidity("Solo se permiten letras");
+    input.reportValidity();
+  } else {
+    input.setCustomValidity("");
+  }
+}
+function validarInputTel(input) {
+  const patron = /^\d+$/;
+  console.log(input.validity);
+
+  if (input.value.length === 0) {
+    input.setCustomValidity("El Campo no puede ir Vacio");
+    input.reportValidity();
+  } else if (!patron.test(input.value)) {
+    input.setCustomValidity("Solo se permiten numeros");
+    input.reportValidity();
+  } else {
+    input.setCustomValidity("");
+  }
+}
+
 const submit = (e) => {
   e.preventDefault();
-  addBookToLibrary(
-    e.target.nombre.value,
-    e.target.autor.value,
-    e.target.paginas.value,
-    e.target.estado.checked
-  );
-  recargarLibros();
-  $form.reset();
-  dialog.close();
+
+  if (
+    e.target.nombre.checkValidity() &&
+    e.target.autor.checkValidity() &&
+    e.target.paginas.checkValidity()
+  ) {
+    addBookToLibrary(
+      e.target.nombre.value,
+      e.target.autor.value,
+      e.target.paginas.value,
+      e.target.estado.checked
+    );
+    recargarLibros();
+    $form.reset();
+    dialog.close();
+  } else {
+    validarInputTel(e.target.paginas);
+    validarInputText(e.target.autor);
+    validarInputText(e.target.nombre);
+  }
 };
 
+const input = (e) => {
+  if (e.target.type === "text") {
+    validarInputText(e.target);
+  }
+
+  if (e.target.type === "tel") {
+    validarInputTel(e.target);
+  }
+};
+
+$form.nombre.addEventListener("input", input);
+$form.autor.addEventListener("input", input);
+$form.paginas.addEventListener("input", input);
 $form.addEventListener("submit", submit);
 d.addEventListener("click", click);
